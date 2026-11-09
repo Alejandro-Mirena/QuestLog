@@ -1,0 +1,11 @@
+# Raiz del monorepo
+node_modules/
+.env
+.env.local
+.expo/
+*.log
+.DS_Store
+Thumbs.db
+
+# Artefactos locales de desarrollo
+qr-questlog.png
