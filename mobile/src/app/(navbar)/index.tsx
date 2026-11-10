@@ -1,37 +1,3 @@
-import { StyleSheet, Text, View } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { HomeScreen } from '@/features/home/home-screen';
 
-import { Colors } from '@/constants/colors';
-
-export default function Index() {
-  return (
-    <SafeAreaView style={styles.screen}>
-      <View style={styles.content}>
-        <Text style={styles.title}>QuestLog</Text>
-        <Text style={styles.subtitle}>Tu biblioteca de juegos</Text>
-      </View>
-    </SafeAreaView>
-  );
-}
-
-const styles = StyleSheet.create({
-  screen: {
-    flex: 1,
-    backgroundColor: Colors.background,
-  },
-  content: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    gap: 8,
-  },
-  title: {
-    color: Colors.text,
-    fontSize: 32,
-    fontWeight: '700',
-  },
-  subtitle: {
-    color: Colors.textMuted,
-    fontSize: 16,
-  },
-});
+export default HomeScreen;
