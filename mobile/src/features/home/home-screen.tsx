@@ -4,6 +4,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { Colors } from "@/constants/colors";
 
 import { PopularCarousel } from "./popular-carousel";
+import { UpcomingCarousel } from "./upcoming-carousel";
 
 export function HomeScreen() {
   return (
@@ -14,6 +15,7 @@ export function HomeScreen() {
       >
         <Text style={styles.title}>Inicio</Text>
         <PopularCarousel />
+        <UpcomingCarousel />
       </ScrollView>
     </SafeAreaView>
   );
