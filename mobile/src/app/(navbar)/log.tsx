@@ -1,12 +1,14 @@
 import { StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-export default function Index() {
+import { Colors } from '@/constants/colors';
+
+export default function LogScreen() {
   return (
     <SafeAreaView style={styles.screen}>
       <View style={styles.content}>
-        <Text style={styles.title}>QuestLog</Text>
-        <Text style={styles.subtitle}>Tu biblioteca de juegos</Text>
+        <Text style={styles.title}>Mi Log</Text>
+        <Text style={styles.subtitle}>Tu biblioteca por estado</Text>
       </View>
     </SafeAreaView>
   );
@@ -15,6 +17,7 @@ export default function Index() {
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
+    backgroundColor: Colors.background,
   },
   content: {
     flex: 1,
@@ -23,11 +26,12 @@ const styles = StyleSheet.create({
     gap: 8,
   },
   title: {
-    fontSize: 32,
+    color: Colors.text,
+    fontSize: 28,
     fontWeight: '700',
   },
   subtitle: {
-    fontSize: 16,
-    opacity: 0.6,
+    color: Colors.textMuted,
+    fontSize: 14,
   },
 });
