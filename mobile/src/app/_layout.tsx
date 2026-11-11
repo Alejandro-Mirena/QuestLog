@@ -2,6 +2,7 @@ import { DarkTheme, Stack, ThemeProvider } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 
 import { Colors } from '@/constants/colors';
+import { LibraryProvider } from '@/features/library/library-context';
 
 const navigationTheme = {
   ...DarkTheme,
@@ -19,8 +20,10 @@ const navigationTheme = {
 export default function RootLayout() {
   return (
     <ThemeProvider value={navigationTheme}>
-      <Stack screenOptions={{ headerShown: false }} />
-      <StatusBar style="light" />
+      <LibraryProvider>
+        <Stack screenOptions={{ headerShown: false }} />
+        <StatusBar style="light" />
+      </LibraryProvider>
     </ThemeProvider>
   );
 }
