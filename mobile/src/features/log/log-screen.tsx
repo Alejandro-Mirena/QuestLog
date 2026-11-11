@@ -3,9 +3,10 @@ import { FlatList, StyleSheet, Text, useWindowDimensions, View } from 'react-nat
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { Colors } from '@/constants/colors';
+import { useLibrary } from '@/features/library/library-context';
+import type { LibraryStatus } from '@/features/library/library-types';
 
 import { GameTile } from './game-tile';
-import { LibraryStatus, LOG_GAMES } from './log-games';
 import { StatusTabs } from './status-tabs';
 
 const COLUMNS = 3;
@@ -14,13 +15,18 @@ const GAP = 12;
 const MAX_WIDTH = 480;
 
 export function LogScreen() {
+  const { games } = useLibrary();
   const [status, setStatus] = useState<LibraryStatus>('playing');
   const { width } = useWindowDimensions();
 
   const contentWidth = Math.min(width, MAX_WIDTH);
   const tileWidth = (contentWidth - HORIZONTAL_PADDING * 2 - GAP * (COLUMNS - 1)) / COLUMNS;
 
-  const games = useMemo(() => LOG_GAMES.filter((game) => game.status === status), [status]);
+  // Se recalcula cuando cambia la pestaña o cuando el contexto recibe un juego nuevo.
+  const visibleGames = useMemo(
+    () => games.filter((game) => game.status === status),
+    [games, status]
+  );
 
   return (
     <SafeAreaView style={styles.screen} edges={['top', 'left', 'right']}>
@@ -32,7 +38,7 @@ export function LogScreen() {
 
       <FlatList
         key={status}
-        data={games}
+        data={visibleGames}
         keyExtractor={(game) => game.id}
         numColumns={COLUMNS}
         renderItem={({ item }) => (

@@ -1,8 +1,14 @@
 import { Pressable, ScrollView, StyleSheet, Text } from 'react-native';
 
 import { Colors } from '@/constants/colors';
+import type { LibraryStatus } from '@/features/library/library-types';
 
-import { LibraryStatus, STATUS_TABS } from './log-games';
+const STATUS_TABS: { key: LibraryStatus; label: string }[] = [
+  { key: 'playing', label: 'Jugando' },
+  { key: 'completed', label: 'Completados' },
+  { key: 'backlog', label: 'Pendientes' },
+  { key: 'dropped', label: 'Abandonados' },
+];
 
 type StatusTabsProps = {
   value: LibraryStatus;
