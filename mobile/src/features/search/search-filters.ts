@@ -17,4 +17,8 @@ export const PLATFORMS = [
   "Móvil",
 ];
 
-export const YEARS = ["2026", "2025", "2024", "2023", "Antes"];
+export const BEFORE_YEAR_LABEL = "Antes";
+
+export const BEFORE_YEAR_LIMIT = 2023;
+
+export const YEARS = ["2026", "2025", "2024", "2023", BEFORE_YEAR_LABEL];

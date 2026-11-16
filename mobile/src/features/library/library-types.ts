@@ -6,6 +6,10 @@ export type LogGame = {
   status: LibraryStatus;
   tone: string;
   hoursPlayed: number;
+  studio: string;
+  genres: string[];
+  platforms: string[];
+  year: number;
 };
 
 export type Review = {

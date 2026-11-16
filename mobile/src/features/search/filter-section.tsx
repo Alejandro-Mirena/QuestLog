@@ -1,22 +1,36 @@
-import { StyleSheet, Text, View } from "react-native";
+import { Pressable, StyleSheet, Text, View } from "react-native";
 
 import { Colors } from "@/constants/colors";
 
 type FilterSectionProps = {
   title: string;
   options: string[];
+  selected: string[];
+  onToggle: (value: string) => void;
 };
 
-export function FilterSection({ title, options }: FilterSectionProps) {
+export function FilterSection({ title, options, selected, onToggle }: FilterSectionProps) {
   return (
     <View style={styles.section}>
       <Text style={styles.title}>{title}</Text>
       <View style={styles.chips}>
-        {options.map((option) => (
-          <View key={option} style={styles.chip}>
-            <Text style={styles.chipLabel}>{option}</Text>
-          </View>
-        ))}
+        {options.map((option) => {
+          const isSelected = selected.includes(option);
+
+          return (
+            <Pressable
+              key={option}
+              onPress={() => onToggle(option)}
+              accessibilityRole="button"
+              accessibilityState={{ selected: isSelected }}
+              style={[styles.chip, isSelected && styles.chipSelected]}
+            >
+              <Text style={[styles.chipLabel, isSelected && styles.chipLabelSelected]}>
+                {option}
+              </Text>
+            </Pressable>
+          );
+        })}
       </View>
     </View>
   );
@@ -44,9 +58,16 @@ const styles = StyleSheet.create({
     paddingHorizontal: 14,
     paddingVertical: 8,
   },
+  chipSelected: {
+    backgroundColor: Colors.primary,
+    borderColor: Colors.primary,
+  },
   chipLabel: {
     color: Colors.textMuted,
     fontSize: 13,
     fontWeight: "600",
+  },
+  chipLabelSelected: {
+    color: Colors.background,
   },
 });

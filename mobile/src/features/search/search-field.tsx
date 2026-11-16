@@ -1,18 +1,39 @@
 import { Ionicons } from "@expo/vector-icons";
-import { StyleSheet, TextInput, View } from "react-native";
+import { Pressable, StyleSheet, TextInput, View } from "react-native";
 
 import { Colors } from "@/constants/colors";
 
-export function SearchField() {
+type SearchFieldProps = {
+  value: string;
+  onChangeText: (text: string) => void;
+};
+
+export function SearchField({ value, onChangeText }: SearchFieldProps) {
   return (
     <View style={styles.field}>
       <Ionicons name="search" size={18} color={Colors.textMuted} />
       <TextInput
         style={styles.input}
+        value={value}
+        onChangeText={onChangeText}
         placeholder="Buscar juegos, sagas o estudios"
         placeholderTextColor={Colors.textMuted}
+        autoCapitalize="none"
+        autoCorrect={false}
+        returnKeyType="search"
         accessibilityLabel="Buscar juegos"
       />
+
+      {value !== "" && (
+        <Pressable
+          onPress={() => onChangeText("")}
+          hitSlop={10}
+          accessibilityRole="button"
+          accessibilityLabel="Borrar búsqueda"
+        >
+          <Ionicons name="close-circle" size={18} color={Colors.textMuted} />
+        </Pressable>
+      )}
     </View>
   );
 }
@@ -23,7 +44,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     gap: 10,
     backgroundColor: Colors.card,
-    borderColor: Colors.primary,
+    borderColor: Colors.border,
     borderWidth: 1,
     borderRadius: 14,
     paddingHorizontal: 14,

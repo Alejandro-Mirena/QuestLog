@@ -7,6 +7,10 @@ export const INITIAL_GAMES: LogGame[] = [
     status: "playing",
     tone: "#123038",
     hoursPlayed: 38,
+    studio: "Team Cherry",
+    genres: ["Plataformas", "Acción", "Indie"],
+    platforms: ["PC", "Switch", "PlayStation 5", "Xbox Series"],
+    year: 2025,
   },
   {
     id: "hades-2",
@@ -14,6 +18,10 @@ export const INITIAL_GAMES: LogGame[] = [
     status: "playing",
     tone: "#2A2233",
     hoursPlayed: 24,
+    studio: "Supergiant Games",
+    genres: ["Acción", "RPG", "Indie"],
+    platforms: ["PC", "Switch", "PlayStation 5", "Xbox Series"],
+    year: 2025,
   },
   {
     id: "balatro",
@@ -21,6 +29,10 @@ export const INITIAL_GAMES: LogGame[] = [
     status: "playing",
     tone: "#2C2230",
     hoursPlayed: 62,
+    studio: "LocalThunk",
+    genres: ["Estrategia", "Indie"],
+    platforms: ["PC", "Switch", "PlayStation 5", "Xbox Series", "Móvil"],
+    year: 2024,
   },
   {
     id: "stardew-valley",
@@ -28,6 +40,10 @@ export const INITIAL_GAMES: LogGame[] = [
     status: "playing",
     tone: "#1D2C24",
     hoursPlayed: 87,
+    studio: "ConcernedApe",
+    genres: ["RPG", "Estrategia", "Indie"],
+    platforms: ["PC", "Switch", "PlayStation 5", "Xbox Series", "Móvil"],
+    year: 2016,
   },
 
   {
@@ -36,6 +52,10 @@ export const INITIAL_GAMES: LogGame[] = [
     status: "completed",
     tone: "#1B2A36",
     hoursPlayed: 54,
+    studio: "Sandfall Interactive",
+    genres: ["RPG", "Aventura"],
+    platforms: ["PC", "PlayStation 5", "Xbox Series"],
+    year: 2025,
   },
   {
     id: "split-fiction",
@@ -43,6 +63,10 @@ export const INITIAL_GAMES: LogGame[] = [
     status: "completed",
     tone: "#152F35",
     hoursPlayed: 15,
+    studio: "Hazelight Studios",
+    genres: ["Aventura", "Acción"],
+    platforms: ["PC", "PlayStation 5", "Xbox Series"],
+    year: 2025,
   },
   {
     id: "cyberpunk-2077",
@@ -50,6 +74,10 @@ export const INITIAL_GAMES: LogGame[] = [
     status: "completed",
     tone: "#3A2A1C",
     hoursPlayed: 96,
+    studio: "CD Projekt Red",
+    genres: ["RPG", "Shooter", "Aventura"],
+    platforms: ["PC", "PlayStation 5", "Xbox Series"],
+    year: 2020,
   },
   {
     id: "hollow-knight",
@@ -57,6 +85,10 @@ export const INITIAL_GAMES: LogGame[] = [
     status: "completed",
     tone: "#123038",
     hoursPlayed: 41,
+    studio: "Team Cherry",
+    genres: ["Plataformas", "Acción", "Indie"],
+    platforms: ["PC", "Switch", "PlayStation 5", "Xbox Series"],
+    year: 2017,
   },
 
   {
@@ -65,6 +97,10 @@ export const INITIAL_GAMES: LogGame[] = [
     status: "backlog",
     tone: "#31291C",
     hoursPlayed: 0,
+    studio: "Capcom",
+    genres: ["Acción", "RPG"],
+    platforms: ["PC", "PlayStation 5", "Xbox Series"],
+    year: 2025,
   },
   {
     id: "kingdom-come-2",
@@ -72,6 +108,10 @@ export const INITIAL_GAMES: LogGame[] = [
     status: "backlog",
     tone: "#26223A",
     hoursPlayed: 0,
+    studio: "Warhorse Studios",
+    genres: ["RPG", "Aventura"],
+    platforms: ["PC", "PlayStation 5", "Xbox Series"],
+    year: 2025,
   },
   {
     id: "persona-5-royal",
@@ -79,6 +119,10 @@ export const INITIAL_GAMES: LogGame[] = [
     status: "backlog",
     tone: "#3A1F22",
     hoursPlayed: 0,
+    studio: "Atlus",
+    genres: ["RPG", "Aventura"],
+    platforms: ["PC", "Switch", "PlayStation 5", "Xbox Series"],
+    year: 2019,
   },
   {
     id: "metaphor-refantazio",
@@ -86,6 +130,10 @@ export const INITIAL_GAMES: LogGame[] = [
     status: "backlog",
     tone: "#2C2230",
     hoursPlayed: 0,
+    studio: "Atlus",
+    genres: ["RPG", "Aventura"],
+    platforms: ["PC", "PlayStation 5", "Xbox Series"],
+    year: 2024,
   },
 
   {
@@ -94,6 +142,10 @@ export const INITIAL_GAMES: LogGame[] = [
     status: "dropped",
     tone: "#26223A",
     hoursPlayed: 12,
+    studio: "FromSoftware",
+    genres: ["Acción", "RPG"],
+    platforms: ["PC", "PlayStation 5", "Xbox Series"],
+    year: 2025,
   },
   {
     id: "dark-souls-3",
@@ -101,6 +153,10 @@ export const INITIAL_GAMES: LogGame[] = [
     status: "dropped",
     tone: "#2A2233",
     hoursPlayed: 9,
+    studio: "FromSoftware",
+    genres: ["Acción", "RPG"],
+    platforms: ["PC", "PlayStation 5", "Xbox Series"],
+    year: 2016,
   },
   {
     id: "anthem",
@@ -108,6 +164,10 @@ export const INITIAL_GAMES: LogGame[] = [
     status: "dropped",
     tone: "#152F35",
     hoursPlayed: 3,
+    studio: "BioWare",
+    genres: ["Shooter", "Acción"],
+    platforms: ["PC", "PlayStation 5", "Xbox Series"],
+    year: 2019,
   },
 ];
 
