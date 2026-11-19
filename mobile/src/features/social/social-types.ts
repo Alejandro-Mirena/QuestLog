@@ -1,3 +1,8 @@
+import type {
+  LibraryStatus,
+  Review,
+} from "@/features/library/library-types";
+
 export type ActivityType = "completed" | "started" | "review" | "hours";
 
 export type ActivityAuthor = {
@@ -16,4 +21,27 @@ export type ActivityEvent = {
   rating?: number;
   hours?: number;
   quote?: string;
+};
+
+export type CommunityReview = Review & {
+  author: ActivityAuthor;
+  likes: number;
+};
+
+export type FriendGame = {
+  title: string;
+  status: LibraryStatus;
+};
+
+export type Friend = {
+  id: string;
+  author: ActivityAuthor;
+  games: FriendGame[];
+};
+
+export type FriendSummary = {
+  friend: Friend;
+  total: number;
+  completed: number;
+  inCommon: number;
 };

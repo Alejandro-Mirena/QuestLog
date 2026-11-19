@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import {
   ScrollView,
   StyleSheet,
@@ -10,9 +10,15 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 import { Colors } from "@/constants/colors";
 import { useLibrary } from "@/features/library/library-context";
+import { ReviewCard } from "@/features/profile/review-card";
 
 import { ActivityItem } from "./activity-item";
-import { buildActivityFeed } from "./social-data";
+import { FriendCard } from "./friend-card";
+import {
+  buildActivityFeed,
+  buildFriendSummaries,
+  COMMUNITY_REVIEWS,
+} from "./social-data";
 
 const HORIZONTAL_PADDING = 20;
 const MAX_WIDTH = 480;
@@ -21,12 +27,33 @@ export function SocialScreen() {
   const { width } = useWindowDimensions();
   const { games, reviews } = useLibrary();
 
+  const [likedReviews, setLikedReviews] = useState<string[]>([]);
+  const [following, setFollowing] = useState<string[]>(["ana"]);
+
   const events = useMemo(
     () => buildActivityFeed(games, reviews),
     [games, reviews]
   );
 
+  const friends = useMemo(() => buildFriendSummaries(games), [games]);
+
   const contentWidth = Math.min(width, MAX_WIDTH);
+
+  function toggleLike(id: string) {
+    setLikedReviews((current) =>
+      current.includes(id)
+        ? current.filter((item) => item !== id)
+        : [...current, id]
+    );
+  }
+
+  function toggleFollow(id: string) {
+    setFollowing((current) =>
+      current.includes(id)
+        ? current.filter((item) => item !== id)
+        : [...current, id]
+    );
+  }
 
   return (
     <SafeAreaView style={styles.screen} edges={["top", "left", "right"]}>
@@ -44,6 +71,40 @@ export function SocialScreen() {
           <View style={styles.feed}>
             {events.map((event) => (
               <ActivityItem key={event.id} event={event} />
+            ))}
+          </View>
+        </View>
+
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>Reseñas de la comunidad</Text>
+          <View style={styles.feed}>
+            {COMMUNITY_REVIEWS.map((review) => {
+              const liked = likedReviews.includes(review.id);
+
+              return (
+                <ReviewCard
+                  key={review.id}
+                  review={review}
+                  author={review.author}
+                  likes={review.likes + (liked ? 1 : 0)}
+                  liked={liked}
+                  onLike={() => toggleLike(review.id)}
+                />
+              );
+            })}
+          </View>
+        </View>
+
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>Amigos</Text>
+          <View style={styles.feed}>
+            {friends.map((summary) => (
+              <FriendCard
+                key={summary.friend.id}
+                summary={summary}
+                isFollowing={following.includes(summary.friend.id)}
+                onToggleFollow={() => toggleFollow(summary.friend.id)}
+              />
             ))}
           </View>
         </View>

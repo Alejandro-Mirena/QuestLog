@@ -1,7 +1,18 @@
 import { Colors } from "@/constants/colors";
-import type { LogGame, Review } from "@/features/library/library-types";
+import type {
+  LibraryStatus,
+  LogGame,
+  Review,
+} from "@/features/library/library-types";
 
-import type { ActivityAuthor, ActivityEvent } from "./social-types";
+import type {
+  ActivityAuthor,
+  ActivityEvent,
+  CommunityReview,
+  Friend,
+  FriendGame,
+  FriendSummary,
+} from "./social-types";
 
 const HOUR = 60;
 const DAY = 24 * HOUR;
@@ -76,6 +87,80 @@ const COMMUNITY_EVENTS: ActivityEvent[] = [
     tone: "#1B2A36",
     minutesAgo: 4 * DAY,
     rating: 4,
+  },
+];
+
+export const COMMUNITY_REVIEWS: CommunityReview[] = [
+  {
+    id: "community-silksong",
+    author: ANA,
+    game: "Hollow Knight: Silksong",
+    rating: 5,
+    date: "Hace 4 h",
+    text: "El combate es rapidísimo y el mapa por fin respeta tu tiempo. Mejoró todo lo bueno del original.",
+    tone: "#123038",
+    likes: 12,
+  },
+  {
+    id: "community-expedition",
+    author: MARCOS,
+    game: "Clair Obscur: Expedition 33",
+    rating: 4,
+    date: "Ayer",
+    text: "Un sistema de turnos con esquivas y paradas. Cada personaje aporta algo distinto al equipo.",
+    tone: "#1B2A36",
+    likes: 8,
+  },
+  {
+    id: "community-hades",
+    author: LUCIA,
+    game: "Hades II",
+    rating: 5,
+    date: "Hace 3 días",
+    text: "La nueva protagonista tiene un ritmo propio y la música vuelve a estar a la altura del mito.",
+    tone: "#2A2233",
+    likes: 5,
+  },
+];
+
+function game(title: string, status: LibraryStatus): FriendGame {
+  return { title, status };
+}
+
+const FRIENDS: Friend[] = [
+  {
+    id: "ana",
+    author: ANA,
+    games: [
+      game("Hollow Knight: Silksong", "completed"),
+      game("Balatro", "playing"),
+      game("Stardew Valley", "playing"),
+      game("Cuphead", "completed"),
+      game("Celeste", "completed"),
+    ],
+  },
+  {
+    id: "marcos",
+    author: MARCOS,
+    games: [
+      game("Hades II", "playing"),
+      game("Clair Obscur: Expedition 33", "completed"),
+      game("Split Fiction", "completed"),
+      game("Monster Hunter Wilds", "backlog"),
+      game("Elden Ring", "completed"),
+      game("Sekiro: Shadows Die Twice", "completed"),
+    ],
+  },
+  {
+    id: "lucia",
+    author: LUCIA,
+    games: [
+      game("Balatro", "completed"),
+      game("Cyberpunk 2077", "completed"),
+      game("Persona 5 Royal", "playing"),
+      game("Dead Cells", "completed"),
+      game("It Takes Two", "backlog"),
+    ],
   },
 ];
 
@@ -156,4 +241,15 @@ export function buildActivityFeed(
   return [...COMMUNITY_EVENTS, ...ownReviews, ...ownCompleted].sort(
     (a, b) => a.minutesAgo - b.minutesAgo
   );
+}
+
+export function buildFriendSummaries(games: LogGame[]): FriendSummary[] {
+  const ownTitles = new Set(games.map((item) => item.title));
+
+  return FRIENDS.map((friend) => ({
+    friend,
+    total: friend.games.length,
+    completed: friend.games.filter((item) => item.status === "completed").length,
+    inCommon: friend.games.filter((item) => ownTitles.has(item.title)).length,
+  }));
 }
