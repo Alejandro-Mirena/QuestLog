@@ -10,14 +10,17 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 import { Colors } from "@/constants/colors";
 import { useLibrary } from "@/features/library/library-context";
+import type { LogGame } from "@/features/library/library-types";
 import { ReviewCard } from "@/features/profile/review-card";
 
 import { ActivityItem } from "./activity-item";
 import { FriendCard } from "./friend-card";
+import { RecommendationCard } from "./recommendation-card";
 import {
   buildActivityFeed,
   buildFriendSummaries,
   COMMUNITY_REVIEWS,
+  RECOMMENDATIONS,
 } from "./social-data";
 
 const HORIZONTAL_PADDING = 20;
@@ -25,7 +28,7 @@ const MAX_WIDTH = 480;
 
 export function SocialScreen() {
   const { width } = useWindowDimensions();
-  const { games, reviews } = useLibrary();
+  const { games, reviews, addGame } = useLibrary();
 
   const [likedReviews, setLikedReviews] = useState<string[]>([]);
   const [following, setFollowing] = useState<string[]>(["ana"]);
@@ -37,7 +40,18 @@ export function SocialScreen() {
 
   const friends = useMemo(() => buildFriendSummaries(games), [games]);
 
+  const libraryIds = useMemo(
+    () => new Set(games.map((game) => game.id)),
+    [games]
+  );
+
   const contentWidth = Math.min(width, MAX_WIDTH);
+
+  function handleAdd(game: LogGame) {
+    if (!libraryIds.has(game.id)) {
+      addGame(game);
+    }
+  }
 
   function toggleLike(id: string) {
     setLikedReviews((current) =>
@@ -104,6 +118,20 @@ export function SocialScreen() {
                 summary={summary}
                 isFollowing={following.includes(summary.friend.id)}
                 onToggleFollow={() => toggleFollow(summary.friend.id)}
+              />
+            ))}
+          </View>
+        </View>
+
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>Recomendaciones</Text>
+          <View style={styles.feed}>
+            {RECOMMENDATIONS.map((recommendation) => (
+              <RecommendationCard
+                key={recommendation.id}
+                recommendation={recommendation}
+                alreadyAdded={libraryIds.has(recommendation.game.id)}
+                onAdd={() => handleAdd(recommendation.game)}
               />
             ))}
           </View>

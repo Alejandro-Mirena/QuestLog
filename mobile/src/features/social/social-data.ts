@@ -12,6 +12,7 @@ import type {
   Friend,
   FriendGame,
   FriendSummary,
+  Recommendation,
 } from "./social-types";
 
 const HOUR = 60;
@@ -120,6 +121,57 @@ export const COMMUNITY_REVIEWS: CommunityReview[] = [
     text: "La nueva protagonista tiene un ritmo propio y la música vuelve a estar a la altura del mito.",
     tone: "#2A2233",
     likes: 5,
+  },
+];
+
+export const RECOMMENDATIONS: Recommendation[] = [
+  {
+    id: "rec-elden-ring",
+    author: MARCOS,
+    game: {
+      id: "elden-ring",
+      title: "Elden Ring",
+      status: "backlog",
+      tone: "#26223A",
+      hoursPlayed: 0,
+      studio: "FromSoftware",
+      genres: ["Acción", "RPG"],
+      platforms: ["PC", "PlayStation 5", "Xbox Series"],
+      year: 2022,
+    },
+    note: "Si te gustaron los jefes de Nightreign, este es el lugar donde empezó todo.",
+  },
+  {
+    id: "rec-cuphead",
+    author: ANA,
+    game: {
+      id: "cuphead",
+      title: "Cuphead",
+      status: "backlog",
+      tone: "#3A1F22",
+      hoursPlayed: 0,
+      studio: "Studio MDHR",
+      genres: ["Plataformas", "Acción", "Indie"],
+      platforms: ["PC", "Switch", "PlayStation 5", "Xbox Series"],
+      year: 2017,
+    },
+    note: "Duro, precioso y con una banda sonora que no se te quita de la cabeza.",
+  },
+  {
+    id: "rec-celeste",
+    author: LUCIA,
+    game: {
+      id: "celeste",
+      title: "Celeste",
+      status: "backlog",
+      tone: "#2A2233",
+      hoursPlayed: 0,
+      studio: "Maddy Makes Games",
+      genres: ["Plataformas", "Indie"],
+      platforms: ["PC", "Switch", "PlayStation 5", "Xbox Series"],
+      year: 2018,
+    },
+    note: "Cada vez que muero aprendo algo. Es corto y deja huella.",
   },
 ];
 

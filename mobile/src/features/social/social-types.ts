@@ -1,5 +1,6 @@
 import type {
   LibraryStatus,
+  LogGame,
   Review,
 } from "@/features/library/library-types";
 
@@ -44,4 +45,11 @@ export type FriendSummary = {
   total: number;
   completed: number;
   inCommon: number;
+};
+
+export type Recommendation = {
+  id: string;
+  author: ActivityAuthor;
+  game: LogGame;
+  note: string;
 };
