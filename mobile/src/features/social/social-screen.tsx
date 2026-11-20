@@ -22,6 +22,8 @@ import {
   COMMUNITY_REVIEWS,
   RECOMMENDATIONS,
 } from "./social-data";
+import { SocialTabs } from "./social-tabs";
+import type { SocialTab } from "./social-types";
 
 const HORIZONTAL_PADDING = 20;
 const MAX_WIDTH = 480;
@@ -30,6 +32,7 @@ export function SocialScreen() {
   const { width } = useWindowDimensions();
   const { games, reviews, addGame } = useLibrary();
 
+  const [tab, setTab] = useState<SocialTab>("activity");
   const [likedReviews, setLikedReviews] = useState<string[]>([]);
   const [following, setFollowing] = useState<string[]>(["ana"]);
 
@@ -80,62 +83,72 @@ export function SocialScreen() {
           <Text style={styles.subtitle}>La actividad de tu comunidad</Text>
         </View>
 
-        <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Actividad reciente</Text>
-          <View style={styles.feed}>
-            {events.map((event) => (
-              <ActivityItem key={event.id} event={event} />
-            ))}
+        <SocialTabs value={tab} onChange={setTab} />
+
+        {tab === "activity" && (
+          <View style={styles.section}>
+            <Text style={styles.sectionTitle}>Actividad reciente</Text>
+            <View style={styles.feed}>
+              {events.map((event) => (
+                <ActivityItem key={event.id} event={event} />
+              ))}
+            </View>
           </View>
-        </View>
+        )}
 
-        <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Reseñas de la comunidad</Text>
-          <View style={styles.feed}>
-            {COMMUNITY_REVIEWS.map((review) => {
-              const liked = likedReviews.includes(review.id);
+        {tab === "reviews" && (
+          <View style={styles.section}>
+            <Text style={styles.sectionTitle}>Reseñas de la comunidad</Text>
+            <View style={styles.feed}>
+              {COMMUNITY_REVIEWS.map((review) => {
+                const liked = likedReviews.includes(review.id);
 
-              return (
-                <ReviewCard
-                  key={review.id}
-                  review={review}
-                  author={review.author}
-                  likes={review.likes + (liked ? 1 : 0)}
-                  liked={liked}
-                  onLike={() => toggleLike(review.id)}
+                return (
+                  <ReviewCard
+                    key={review.id}
+                    review={review}
+                    author={review.author}
+                    likes={review.likes + (liked ? 1 : 0)}
+                    liked={liked}
+                    onLike={() => toggleLike(review.id)}
+                  />
+                );
+              })}
+            </View>
+          </View>
+        )}
+
+        {tab === "friends" && (
+          <View style={styles.section}>
+            <Text style={styles.sectionTitle}>Amigos</Text>
+            <View style={styles.feed}>
+              {friends.map((summary) => (
+                <FriendCard
+                  key={summary.friend.id}
+                  summary={summary}
+                  isFollowing={following.includes(summary.friend.id)}
+                  onToggleFollow={() => toggleFollow(summary.friend.id)}
                 />
-              );
-            })}
+              ))}
+            </View>
           </View>
-        </View>
+        )}
 
-        <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Amigos</Text>
-          <View style={styles.feed}>
-            {friends.map((summary) => (
-              <FriendCard
-                key={summary.friend.id}
-                summary={summary}
-                isFollowing={following.includes(summary.friend.id)}
-                onToggleFollow={() => toggleFollow(summary.friend.id)}
-              />
-            ))}
+        {tab === "recommendations" && (
+          <View style={styles.section}>
+            <Text style={styles.sectionTitle}>Recomendaciones</Text>
+            <View style={styles.feed}>
+              {RECOMMENDATIONS.map((recommendation) => (
+                <RecommendationCard
+                  key={recommendation.id}
+                  recommendation={recommendation}
+                  alreadyAdded={libraryIds.has(recommendation.game.id)}
+                  onAdd={() => handleAdd(recommendation.game)}
+                />
+              ))}
+            </View>
           </View>
-        </View>
-
-        <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Recomendaciones</Text>
-          <View style={styles.feed}>
-            {RECOMMENDATIONS.map((recommendation) => (
-              <RecommendationCard
-                key={recommendation.id}
-                recommendation={recommendation}
-                alreadyAdded={libraryIds.has(recommendation.game.id)}
-                onAdd={() => handleAdd(recommendation.game)}
-              />
-            ))}
-          </View>
-        </View>
+        )}
       </ScrollView>
     </SafeAreaView>
   );

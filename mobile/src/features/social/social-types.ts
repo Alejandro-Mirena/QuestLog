@@ -6,6 +6,8 @@ import type {
 
 export type ActivityType = "completed" | "started" | "review" | "hours";
 
+export type SocialTab = "activity" | "reviews" | "friends" | "recommendations";
+
 export type ActivityAuthor = {
   name: string;
   handle: string;
