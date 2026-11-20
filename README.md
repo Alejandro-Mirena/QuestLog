@@ -1,26 +1,44 @@
 # QuestLog
 
-Estructura inicial del proyecto. Todavía sin lógica de negocio.
+Biblioteca personal de videojuegos hecha con Expo, React Native y TypeScript.
 
-```text
-QuestLog/
-├─ mobile/     App Expo (React Native + Expo Router + TypeScript)
-└─ backend/    API (pendiente)
-```
+La app es **local y derivada**: no hay backend, ni API, ni persistencia. Los juegos, las horas y las reseñas viven en memoria y se reinician al recargar la página. Las estadísticas se calculan siempre desde ese estado.
 
-## Mobile
+## Ejecutar
 
 ```bash
 cd mobile
 npm install
-npx expo start
+npm run web
 ```
 
-- Rutas: `mobile/src/app/` (cada archivo es una pantalla).
-- Componentes reutilizables: `mobile/src/components/`.
-- Lógica por dominio: `mobile/src/features/`.
-- Cliente HTTP y utilidades: `mobile/src/lib/`.
+## Verificar y exportar
 
-## Backend
+```bash
+cd mobile
+npx tsc --noEmit
+npm run build:web
+```
 
-La carpeta está reservada para la API. Se definirá cuando empecemos esa parte.
+El export estático sale en `mobile/dist` y se despliega en Vercel desde la configuración `vercel.json` de la raíz.
+
+## Estructura
+
+```text
+mobile/src/
+├─ app/        Rutas y layouts (Expo Router)
+├─ components/ Componentes compartidos
+├─ constants/  Paleta de colores
+├─ features/   Lógica por dominio: home, library, search, log, profile, social
+└─ lib/        Utilidades puras
+```
+
+## Alcance
+
+- Inicio con juegos populares y próximos lanzamientos.
+- Búsqueda con filtros y límite de texto.
+- Mi Log organizado por estados.
+- Perfil con estadísticas derivadas.
+- Social de ejemplo: actividad, reseñas, amigos y recomendaciones.
+
+No están previstos chat, notificaciones push ni feed infinito.

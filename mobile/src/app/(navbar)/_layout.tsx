@@ -21,13 +21,15 @@ const TABS: TabItem[] = [
   { name: 'profile', title: 'Perfil', activeIcon: 'person', inactiveIcon: 'person-outline' },
 ];
 
-const DEFAULT_TAB = TABS[0];
-
 export default function NavbarLayout() {
   return (
     <Tabs
       screenOptions={({ route }) => {
-        const tab = TABS.find((item) => item.name === route.name) ?? DEFAULT_TAB;
+        const tab = TABS.find((item) => item.name === route.name);
+
+        if (!tab) {
+          throw new Error(`Pestaña no registrada en TABS: ${route.name}`);
+        }
 
         return {
           headerShown: false,

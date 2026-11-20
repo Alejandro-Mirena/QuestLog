@@ -1,3 +1,4 @@
+import { Head } from 'expo-router/head';
 import { DarkTheme, Stack, ThemeProvider } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 
@@ -20,6 +21,14 @@ const navigationTheme = {
 export default function RootLayout() {
   return (
     <ThemeProvider value={navigationTheme}>
+      <Head>
+        <title>QuestLog — Tu biblioteca de videojuegos</title>
+        <meta
+          name="description"
+          content="Lleva el control de tus juegos, tus horas y tus reseñas desde una sola app."
+        />
+        <meta name="theme-color" content="#0A0F12" />
+      </Head>
       <LibraryProvider>
         <Stack screenOptions={{ headerShown: false }} />
         <StatusBar style="light" />
